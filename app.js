@@ -1,3 +1,6 @@
+// Add this at the top of app.js
+console.log('App.js loaded');
+
 // Global variables
 let currentUser = null;
 let userData = null;
@@ -531,7 +534,8 @@ function generateReferralCode(phone) {
 }
 
 // Initialize app
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded');
     checkAuthState();
 });
 

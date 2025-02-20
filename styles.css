@@ -54,6 +54,9 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Loading Overlay */
@@ -135,6 +138,10 @@ body {
 .auth-content {
   text-align: center;
   padding: var(--spacing-xl) var(--spacing-md);
+  background-color: white;
+  margin: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .auth-header {
