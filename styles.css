@@ -56,88 +56,32 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Professional Loading Overlay Styles */
+/* Loading Overlay */
 .loading-overlay {
-  position: absolute;
-  top: -45px;
-  left: 50%;
-  transform: translateX(-50%);
-  width:100;
-  min-width: 130px;
-  height: 36px;
-  background: var(--surface-color);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
   display: none;
-  flex-direction: row;
-  align-items: center;
   justify-content: center;
-  gap: 8px;
-  z-index: 100;
-  padding: 0 15px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  display: none;
+  align-items: center;
+  z-index: 9999;
 }
 
 .spinner {
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--primary-color);
-  border-top-color: transparent;
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid var(--primary-color);
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  display: none;
-}
-
-.loading-text {
-  color: var(--text-primary);
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-}
-
-/* Loading states */
-.loading-overlay.error {
-  background: #FFF5F5;
-  border-color: var(--error-color);
-}
-
-.loading-overlay.error .spinner {
-  border-color: var(--error-color);
-  border-top-color: transparent;
-  animation: none;
-  transform: rotate(45deg);
-}
-
-.loading-overlay.error .loading-text {
-  color: var(--error-color);
-}
-
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -60px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -45px);
-  }
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Add subtle pulse animation */
-.loading-overlay:not(.error) .spinner {
-  animation: spin 0.8s linear infinite, pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.1) rotate(180deg); }
-  100% { transform: scale(1) rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* App Container */
@@ -669,28 +613,25 @@ input[type="tel"]::placeholder {
   animation: modalSlideIn 0.3s ease;
 }
 
-/* Toast */
+/* Toast Container */
 .toast-container {
   position: fixed;
-  bottom: 80px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
-  width: 90%;
-  max-width: 400px;
+  z-index: 10000;
 }
 
 .toast {
-  background: var(--surface-color);
-  color: var(--text-primary);
-  padding: var(--spacing-md);
-  border-radius: var(--radius-md);
-  margin-bottom: var(--spacing-sm);
-  box-shadow: var(--shadow-md);
+  background: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  animation: slideUp 0.3s ease;
+  gap: 8px;
+  transition: opacity 0.3s ease;
 }
 
 .toast.success {
@@ -701,9 +642,16 @@ input[type="tel"]::placeholder {
   border-left: 4px solid var(--error-color);
 }
 
-@keyframes slideUp {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+.toast i {
+  font-size: 18px;
+}
+
+.toast.success i {
+  color: var(--success-color);
+}
+
+.toast.error i {
+  color: var(--error-color);
 }
 
 /* Responsive Design */
@@ -1197,52 +1145,4 @@ input[type="tel"]::placeholder {
     font-family: monospace;
     font-size: 14px;
     color: var(--text-primary);
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.task-form {
-    margin: 20px 0;
-    display: flex;
-    gap: 10px;
-}
-
-.task-form input {
-    flex: 1;
-    padding: 8px;
-    font-size: 16px;
-}
-
-.task-form button {
-    padding: 8px 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.task-list {
-    margin-top: 20px;
-}
-
-.task-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    margin: 5px 0;
-    background-color: #f9f9f9;
-    border-radius: 4px;
-}
-
-.delete-btn {
-    background-color: #ff4444;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
 } 
