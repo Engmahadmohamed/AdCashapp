@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #4C6FFF;
+            --secondary-color: #6C757D;
+            --success-color: #28A745;
+            --danger-color: #DC3545;
+            --warning-color: #FFC107;
+            --info-color: #17A2B8;
+            --light-color: #F8F9FA;
+            --dark-color: #343A40;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F7FB;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: var(--white);
+            padding: 1.5rem;
+            border-right: 1px solid #E9ECEF;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .table-container {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #E9ECEF;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-item.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--danger-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2 style="margin-bottom: 2rem;">Admin Panel</h2>
+            <nav>
+                <a href="#" class="nav-item active" onclick="showSection('dashboard')">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('users')">
+                    <i class="fas fa-users"></i>
+                    Users
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('withdrawals')">
+                    <i class="fas fa-money-bill-wave"></i>
+                    Withdrawals
+                </a>
+            </nav>
+            <button onclick="logout()" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div id="dashboardSection">
+                <h2 style="margin-bottom: 1.5rem;">Dashboard Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Users</h3>
+                        <div id="totalUsers" style="font-size: 2rem; font-weight: 600; margin-top: 0.5rem;">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Earnings</h3>
+                        <div id="totalEarnings" style="font-size: 2rem; font-weight: 600; margin-top: 0.5rem;">$0.00</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pending Withdrawals</h3>
+                        <div id="pendingWithdrawals" style="font-size: 2rem; font-weight: 600; margin-top: 0.5rem;">0</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <h3 style="margin-bottom: 1rem;">Recent Activity</h3>
+                    <table id="activityTable">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Amount</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="activityTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Check authentication
+        if (!sessionStorage.getItem('isAdmin')) {
+            window.location.href = 'admin.html';
+        }
+
+        function showSection(section) {
+            // Add your section switching logic here
+        }
+
+        function logout() {
+            sessionStorage.removeItem('isAdmin');
+            window.location.href = 'admin.html';
+        }
+
+        // Load dashboard data
+        function loadDashboardData() {
+            // Get data from localStorage for demonstration
+            const users = Object.keys(localStorage)
+                .filter(key => key.startsWith('userData_'))
+                .map(key => JSON.parse(localStorage.getItem(key)));
+
+            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('totalEarnings').textContent = 
+                '$' + users.reduce((sum, user) => sum + (user.balance || 0), 0).toFixed(2);
+            document.getElementById('pendingWithdrawals').textContent = 
+                users.filter(user => user.pendingWithdrawal).length;
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', loadDashboardData);
+    </script>
+</body>
+</html> 
