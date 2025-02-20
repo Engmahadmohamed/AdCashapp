@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-shield-alt"></i>
+                <h2>Admin Panel</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+                <a href="#users" class="nav-item" data-section="users">
+                    <i class="fas fa-users"></i>
+                    Users
+                </a>
+                <a href="#withdrawals" class="nav-item" data-section="withdrawals">
+                    <i class="fas fa-money-bill-wave"></i>
+                    Withdrawals
+                </a>
+                <a href="#settings" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button onclick="adminLogout()" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchUser" placeholder="Search users...">
+                </div>
+                <div class="admin-profile">
+                    <span id="adminName">Admin</span>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->
+            <section id="dashboardSection" class="content-section active">
+                <h2>Dashboard Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon users">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Total Users</h3>
+                            <div class="stat-value" id="totalUsers">0</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span id="newUsers">0 today</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon earnings">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Total Withdrawn</h3>
+                            <div class="stat-value" id="totalWithdrawn">$0.00</div>
+                            <div class="stat-change">
+                                <span id="pendingWithdrawals">0 pending</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon ads">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Ads Watched</h3>
+                            <div class="stat-value" id="totalAdsWatched">0</div>
+                            <div class="stat-change">
+                                <span id="todayAds">0 today</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list" id="activityList">
+                        <!-- Activity items will be dynamically added here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="usersSection" class="content-section">
+                <h2>User Management</h2>
+                <div class="table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Balance</th>
+                                <th>Total Earned</th>
+                                <th>Ads Watched</th>
+                                <th>Referrals</th>
+                                <th>Join Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- User rows will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Withdrawals Section -->
+            <section id="withdrawalsSection" class="content-section">
+                <h2>Withdrawal Requests</h2>
+                <div class="withdrawals-grid" id="withdrawalsList">
+                    <!-- Withdrawal cards will be dynamically added here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- User Details Modal -->
+    <div id="userDetailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>User Details</h3>
+                <button onclick="closeUserModal()" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="userDetails">
+                <!-- User details will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html> 
