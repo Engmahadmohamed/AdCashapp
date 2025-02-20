@@ -71,7 +71,7 @@
             <i class="fas fa-shield-alt"></i>
             <h2>Admin Login</h2>
         </div>
-        <form onsubmit="return login(event)">
+        <form id="loginForm">
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" required>
@@ -81,16 +81,26 @@
     </div>
 
     <script>
-        function login(event) {
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const password = document.getElementById('password').value;
+            
             if (password === 'admin123') {
+                // Store admin session
+                localStorage.setItem('adminAuth', 'true');
+                // Redirect to dashboard
                 window.location.href = 'admin-dashboard.html';
             } else {
                 alert('Invalid password');
             }
-            return false;
-        }
+        });
+
+        // Check if already logged in
+        window.addEventListener('load', function() {
+            if (localStorage.getItem('adminAuth') === 'true') {
+                window.location.href = 'admin-dashboard.html';
+            }
+        });
     </script>
 </body>
 </html> 

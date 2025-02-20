@@ -111,6 +111,273 @@
             cursor: pointer;
             margin-top: auto;
         }
+
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            animation: modalSlideIn 0.3s ease;
+        }
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .modal-content h3 {
+            color: #2C3E50;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #F0F2F5;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: #4A5568;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #F8FAFC;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 111, 255, 0.1);
+            background: white;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #F0F2F5;
+        }
+        .save-btn,
+        .cancel-btn {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .save-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+        .save-btn:hover {
+            background: #3D5CCC;
+            transform: translateY(-1px);
+        }
+        .cancel-btn {
+            background: #EDF2F7;
+            color: #4A5568;
+        }
+        .cancel-btn:hover {
+            background: #E2E8F0;
+        }
+        .save-btn::before {
+            content: '✓';
+            font-size: 1.1rem;
+        }
+        .cancel-btn::before {
+            content: '×';
+            font-size: 1.2rem;
+        }
+        .withdrawals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        .withdrawal-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 0.25rem;
+        }
+        .edit-btn { background: #4C6FFF; color: white; }
+        .delete-btn { background: #DC3545; color: white; }
+        .approve-btn { background: #28A745; color: white; }
+        .reject-btn { background: #DC3545; color: white; }
+
+        /* Withdrawal Section Styles */
+        .withdrawals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .withdrawals-header h2 {
+            color: #2C3E50;
+            margin: 0;
+        }
+
+        .empty-withdrawals {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .empty-withdrawals i {
+            font-size: 4rem;
+            color: #E2E8F0;
+            margin-bottom: 1rem;
+        }
+
+        .empty-withdrawals p {
+            color: #64748B;
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+
+        .empty-withdrawals .sub-text {
+            color: #94A3B8;
+            font-size: 0.9rem;
+        }
+
+        .withdrawal-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .withdrawal-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .withdrawal-amount {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2C3E50;
+            margin-bottom: 1rem;
+        }
+
+        .withdrawal-info {
+            color: #64748B;
+            margin-bottom: 0.5rem;
+        }
+
+        .withdrawal-info i {
+            width: 20px;
+            color: #94A3B8;
+            margin-right: 0.5rem;
+        }
+
+        .withdrawal-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        /* Export Button Styles */
+        .export-btn {
+            background: #4C6FFF;
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .export-btn:hover {
+            background: #3D5CCC;
+            transform: translateY(-1px);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .search-export-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        #userSearch {
+            padding: 0.75rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        #userSearch:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 111, 255, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -139,7 +406,8 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <div id="dashboardSection">
+            <!-- Dashboard Section -->
+            <div id="dashboardSection" class="section active">
                 <h2 style="margin-bottom: 1.5rem;">Dashboard Overview</h2>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -171,26 +439,121 @@
                     </table>
                 </div>
             </div>
+
+            <!-- Users Section -->
+            <div id="usersSection" class="section" style="display: none;">
+                <div class="table-header">
+                    <h2>User Management</h2>
+                    <div class="search-export-container">
+                        <input type="text" id="userSearch" placeholder="Search users...">
+                        <button onclick="exportUserData()" class="export-btn">
+                            <i class="fas fa-download"></i> Export Users
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phone</th>
+                                <th>Balance</th>
+                                <th>Total Earned</th>
+                                <th>Ads Watched</th>
+                                <th>Join Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Withdrawals Section -->
+            <div id="withdrawalsSection" class="section" style="display: none;">
+                <div class="withdrawals-header">
+                    <h2>Withdrawal Requests</h2>
+                    <button onclick="exportWithdrawalData()" class="export-btn">
+                        <i class="fas fa-download"></i> Export Withdrawals
+                    </button>
+                </div>
+                <div class="withdrawals-grid" id="withdrawalsList">
+                    <!-- This content will be dynamically replaced -->
+                </div>
+            </div>
         </main>
     </div>
 
+    <!-- User Edit Modal -->
+    <div id="userEditModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Edit User</h3>
+            <form id="userEditForm">
+                <input type="hidden" id="editUserId">
+                <div class="form-group">
+                    <label>Balance ($)</label>
+                    <input type="number" id="editBalance" step="0.01" min="0">
+                </div>
+                <div class="form-group">
+                    <label>Ads Watched</label>
+                    <input type="number" id="editAdsWatched" min="0">
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="editStatus">
+                        <option value="active">Active</option>
+                        <option value="blocked">Blocked</option>
+                    </select>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Save Changes</button>
+                    <button type="button" onclick="closeUserModal()" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Check authentication
-        if (!sessionStorage.getItem('isAdmin')) {
+        // Check authentication immediately
+        function checkAuth() {
+            if (localStorage.getItem('adminAuth') !== 'true') {
+                window.location.href = 'admin.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Check auth on page load
+        if (!checkAuth()) {
             window.location.href = 'admin.html';
         }
 
         function showSection(section) {
-            // Add your section switching logic here
+            if (!checkAuth()) return;
+            
+            document.querySelectorAll('.section').forEach(s => {
+                s.style.display = 'none';
+            });
+            document.getElementById(section + 'Section').style.display = 'block';
+            
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            if (section === 'users') loadUsers();
+            if (section === 'withdrawals') loadWithdrawals();
+            if (section === 'dashboard') loadDashboardData();
         }
 
         function logout() {
-            sessionStorage.removeItem('isAdmin');
+            localStorage.removeItem('adminAuth');
             window.location.href = 'admin.html';
         }
 
         // Load dashboard data
         function loadDashboardData() {
+            if (!checkAuth()) return;
+
             // Get data from localStorage for demonstration
             const users = Object.keys(localStorage)
                 .filter(key => key.startsWith('userData_'))
@@ -201,10 +564,256 @@
                 '$' + users.reduce((sum, user) => sum + (user.balance || 0), 0).toFixed(2);
             document.getElementById('pendingWithdrawals').textContent = 
                 users.filter(user => user.pendingWithdrawal).length;
+            
+            // Load activity table
+            loadActivityTable(users);
         }
 
-        // Initialize dashboard
-        document.addEventListener('DOMContentLoaded', loadDashboardData);
+        function loadActivityTable(users) {
+            const tbody = document.getElementById('activityTableBody');
+            tbody.innerHTML = '';
+
+            users.forEach(user => {
+                if (user.history) {
+                    user.history.slice(-5).forEach(activity => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${user.phone || 'Unknown'}</td>
+                            <td>${activity.action || 'Action'}</td>
+                            <td>${activity.amount ? '$' + activity.amount.toFixed(2) : '-'}</td>
+                            <td>${new Date(activity.time).toLocaleString()}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            });
+        }
+
+        // Users Section Functions
+        function loadUsers() {
+            if (!checkAuth()) return;
+            
+            const users = Object.keys(localStorage)
+                .filter(key => key.startsWith('userData_'))
+                .map(key => ({
+                    phone: key.replace('userData_', ''),
+                    ...JSON.parse(localStorage.getItem(key))
+                }));
+
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = users.map(user => `
+                <tr>
+                    <td>${user.phone}</td>
+                    <td>$${user.balance?.toFixed(2) || '0.00'}</td>
+                    <td>$${user.totalEarned?.toFixed(2) || '0.00'}</td>
+                    <td>${user.adsWatched || 0}</td>
+                    <td>${new Date(user.joinDate).toLocaleDateString()}</td>
+                    <td>
+                        <button onclick="editUser('${user.phone}')" class="action-btn edit-btn">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="deleteUser('${user.phone}')" class="action-btn delete-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function editUser(phone) {
+            const userData = JSON.parse(localStorage.getItem(`userData_${phone}`));
+            document.getElementById('editUserId').value = phone;
+            document.getElementById('editBalance').value = userData.balance || 0;
+            document.getElementById('editAdsWatched').value = userData.adsWatched || 0;
+            document.getElementById('editStatus').value = userData.status || 'active';
+            document.getElementById('userEditModal').style.display = 'flex';
+        }
+
+        function closeUserModal() {
+            document.getElementById('userEditModal').style.display = 'none';
+        }
+
+        document.getElementById('userEditForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const phone = document.getElementById('editUserId').value;
+            const userData = JSON.parse(localStorage.getItem(`userData_${phone}`));
+            
+            userData.balance = parseFloat(document.getElementById('editBalance').value);
+            userData.adsWatched = parseInt(document.getElementById('editAdsWatched').value);
+            userData.status = document.getElementById('editStatus').value;
+            
+            localStorage.setItem(`userData_${phone}`, JSON.stringify(userData));
+            closeUserModal();
+            loadUsers();
+        });
+
+        function deleteUser(phone) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                localStorage.removeItem(`userData_${phone}`);
+                loadUsers();
+            }
+        }
+
+        // Withdrawals Section Functions
+        function loadWithdrawals() {
+            if (!checkAuth()) return;
+
+            const withdrawals = [];
+            Object.keys(localStorage)
+                .filter(key => key.startsWith('userData_'))
+                .forEach(key => {
+                    const user = JSON.parse(localStorage.getItem(key));
+                    const phone = key.replace('userData_', '');
+                    if (user.withdrawals) {
+                        user.withdrawals.forEach(w => withdrawals.push({...w, phone}));
+                    }
+                });
+
+            const container = document.getElementById('withdrawalsList');
+            const pendingWithdrawals = withdrawals.filter(w => w.status === 'pending');
+
+            if (pendingWithdrawals.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-withdrawals">
+                        <i class="fas fa-inbox"></i>
+                        <p>No Pending Withdrawals</p>
+                        <p class="sub-text">All withdrawal requests have been processed</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = pendingWithdrawals.map(w => `
+                    <div class="withdrawal-card">
+                        <div class="withdrawal-amount">$${w.amount.toFixed(2)}</div>
+                        <div class="withdrawal-info">
+                            <i class="fas fa-phone"></i>
+                            ${w.phone}
+                        </div>
+                        <div class="withdrawal-info">
+                            <i class="fas fa-clock"></i>
+                            ${new Date(w.date).toLocaleString()}
+                        </div>
+                        <div class="withdrawal-actions">
+                            <button onclick="processWithdrawal('${w.phone}', '${w.id}', 'approved')" 
+                                class="action-btn approve-btn">
+                                <i class="fas fa-check"></i> Approve
+                            </button>
+                            <button onclick="processWithdrawal('${w.phone}', '${w.id}', 'rejected')" 
+                                class="action-btn reject-btn">
+                                <i class="fas fa-times"></i> Reject
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function processWithdrawal(phone, withdrawalId, status) {
+            const userData = JSON.parse(localStorage.getItem(`userData_${phone}`));
+            const withdrawal = userData.withdrawals.find(w => w.id === withdrawalId);
+            
+            if (withdrawal) {
+                withdrawal.status = status;
+                if (status === 'rejected') {
+                    userData.balance += withdrawal.amount; // Refund if rejected
+                }
+                localStorage.setItem(`userData_${phone}`, JSON.stringify(userData));
+                loadWithdrawals();
+            }
+        }
+
+        // Export Functions
+        function exportUserData() {
+            const users = Object.keys(localStorage)
+                .filter(key => key.startsWith('userData_'))
+                .map(key => {
+                    const user = JSON.parse(localStorage.getItem(key));
+                    return {
+                        phone: key.replace('userData_', ''),
+                        balance: user.balance || 0,
+                        totalEarned: user.totalEarned || 0,
+                        adsWatched: user.adsWatched || 0,
+                        joinDate: user.joinDate,
+                        status: user.status || 'active'
+                    };
+                });
+
+            const csvContent = [
+                ['Phone', 'Balance', 'Total Earned', 'Ads Watched', 'Join Date', 'Status'],
+                ...users.map(user => [
+                    user.phone,
+                    user.balance.toFixed(2),
+                    user.totalEarned.toFixed(2),
+                    user.adsWatched,
+                    new Date(user.joinDate).toLocaleString(),
+                    user.status
+                ])
+            ].map(row => row.join(',')).join('\n');
+
+            downloadCSV(csvContent, 'users_data.csv');
+        }
+
+        function exportWithdrawalData() {
+            const withdrawals = [];
+            Object.keys(localStorage)
+                .filter(key => key.startsWith('userData_'))
+                .forEach(key => {
+                    const user = JSON.parse(localStorage.getItem(key));
+                    const phone = key.replace('userData_', '');
+                    if (user.withdrawals) {
+                        user.withdrawals.forEach(w => withdrawals.push({
+                            phone,
+                            amount: w.amount,
+                            status: w.status,
+                            date: w.date
+                        }));
+                    }
+                });
+
+            const csvContent = [
+                ['Phone', 'Amount', 'Status', 'Date'],
+                ...withdrawals.map(w => [
+                    w.phone,
+                    w.amount.toFixed(2),
+                    w.status,
+                    new Date(w.date).toLocaleString()
+                ])
+            ].map(row => row.join(',')).join('\n');
+
+            downloadCSV(csvContent, 'withdrawals_data.csv');
+        }
+
+        function downloadCSV(content, fileName) {
+            const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            if (navigator.msSaveBlob) { // IE 10+
+                navigator.msSaveBlob(blob, fileName);
+            } else {
+                link.href = URL.createObjectURL(blob);
+                link.download = fileName;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // Update search functionality
+        document.getElementById('userSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#usersTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (checkAuth()) {
+                loadDashboardData();
+            }
+        });
     </script>
 </body>
 </html> 
