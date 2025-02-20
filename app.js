@@ -639,4 +639,14 @@ function ensureValidDate(date) {
 
 function sanitizeUsername(username) {
     return username.replace(/[^a-zA-Z0-9]/g, '');
+}
+
+// Admin access function
+function checkAdminAccess() {
+    const password = prompt("Enter admin password:");
+    if (password === "admin123") {
+        window.location.href = "admin.html";
+    } else {
+        alert("Invalid admin password");
+    }
 } 

@@ -20,11 +20,10 @@ function checkAdminAuth() {
 
 // Check if admin is logged in
 function checkAuth() {
-    if (!adminToken) {
-        window.location.href = '/admin-login.html';
-        return false;
+    const isAdmin = sessionStorage.getItem('isAdmin');
+    if (!isAdmin) {
+        window.location.href = 'index.html';
     }
-    return true;
 }
 
 // Admin login
@@ -279,21 +278,15 @@ document.querySelectorAll('.nav-item').forEach(item => {
     });
 });
 
-function showSection(sectionName) {
-    // Update navigation active state
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.toggle('active', item.dataset.section === sectionName);
+function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
     });
-
-    // Show selected section
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.style.display = section.id === `${sectionName}Section` ? 'block' : 'none';
-    });
-
+    document.getElementById(sectionId + 'Section').classList.add('active');
+    
     // Load section data
-    if (sectionName === 'dashboard') loadDashboard();
-    if (sectionName === 'users') loadUsers();
-    if (sectionName === 'withdrawals') loadWithdrawals();
+    if (sectionId === 'users') loadUsers();
+    if (sectionId === 'withdrawals') loadWithdrawals();
 }
 
 // Dashboard functions
@@ -399,4 +392,68 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
     loadDashboard();
+});
+
+// Show different sections
+function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+    document.getElementById(sectionId + 'Section').classList.add('active');
+    
+    // Load section data
+    if (sectionId === 'users') loadUsers();
+    if (sectionId === 'withdrawals') loadWithdrawals();
+}
+
+// Load users
+function loadUsers() {
+    const users = getAllUsers();
+    const tbody = document.getElementById('usersTableBody');
+    tbody.innerHTML = '';
+    
+    users.forEach(user => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${user.phone}</td>
+            <td>$${user.balance.toFixed(2)}</td>
+            <td>${user.adsWatched}</td>
+            <td>
+                <button onclick="editUser('${user.phone}')">Edit</button>
+                <button onclick="deleteUser('${user.phone}')">Delete</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// Load withdrawals
+function loadWithdrawals() {
+    const withdrawals = getAllWithdrawals();
+    const container = document.getElementById('withdrawalsList');
+    container.innerHTML = '';
+    
+    withdrawals.forEach(withdrawal => {
+        const div = document.createElement('div');
+        div.className = 'withdrawal-card';
+        div.innerHTML = `
+            <h3>$${withdrawal.amount}</h3>
+            <p>Phone: ${withdrawal.phone}</p>
+            <p>Status: ${withdrawal.status}</p>
+            <button onclick="processWithdrawal('${withdrawal.id}')">Process</button>
+        `;
+        container.appendChild(div);
+    });
+}
+
+// Logout function
+function logout() {
+    sessionStorage.removeItem('isAdmin');
+    window.location.href = 'index.html';
+}
+
+// Initialize admin panel
+document.addEventListener('DOMContentLoaded', () => {
+    checkAuth();
+    showSection('dashboard');
 }); 
