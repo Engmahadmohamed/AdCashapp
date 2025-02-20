@@ -1,7 +1,12 @@
 {
-  "dependencies": {
-    "express": "^4.17.1",
-    "mysql2": "^2.3.0",
-    "path": "^0.12.7"
+  "name": "ad-cash-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "serve public",
+    "build": "echo 'No build step required'"
+  },
+  "devDependencies": {
+    "serve": "^14.0.0"
   }
 } 
