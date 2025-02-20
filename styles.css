@@ -54,9 +54,6 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 /* Loading Overlay */
@@ -138,10 +135,6 @@ body {
 .auth-content {
   text-align: center;
   padding: var(--spacing-xl) var(--spacing-md);
-  background-color: white;
-  margin: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .auth-header {
@@ -620,25 +613,28 @@ input[type="tel"]::placeholder {
   animation: modalSlideIn 0.3s ease;
 }
 
-/* Toast Container */
+/* Toast */
 .toast-container {
   position: fixed;
-  bottom: 20px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10000;
+  z-index: 1000;
+  width: 90%;
+  max-width: 400px;
 }
 
 .toast {
-  background: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  margin-bottom: 8px;
+  background: var(--surface-color);
+  color: var(--text-primary);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-sm);
+  box-shadow: var(--shadow-md);
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: opacity 0.3s ease;
+  gap: var(--spacing-sm);
+  animation: slideUp 0.3s ease;
 }
 
 .toast.success {
@@ -649,16 +645,9 @@ input[type="tel"]::placeholder {
   border-left: 4px solid var(--error-color);
 }
 
-.toast i {
-  font-size: 18px;
-}
-
-.toast.success i {
-  color: var(--success-color);
-}
-
-.toast.error i {
-  color: var(--error-color);
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 /* Responsive Design */
